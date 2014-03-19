@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,6 +45,21 @@ public class RecipeDetails extends Activity{
 	
 	private class GetRecipeDetail extends AsyncTask<ApiConnector, Long, JSONArray>
 	{
+		ProgressDialog pdialog; // creates progress dialog
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			
+			// set progress dialog propertied
+			pdialog = new ProgressDialog(RecipeDetails.this);
+			pdialog.setMessage("Fetching Recipe Details");
+			pdialog.setIndeterminate(false);
+			pdialog.setCancelable(false);
+			
+			pdialog.show();
+		}
+
 
 		@Override
 		protected JSONArray doInBackground(ApiConnector... params) {
@@ -61,6 +77,8 @@ public class RecipeDetails extends Activity{
 				tvRecipeDetailName.setText(jobject.getString("name"));
 				tvRecipeDetailIngredient.setText(jobject.getString("ingredient"));
 				tvRecipeDetailDetail.setText(jobject.getString("detail"));
+				
+				pdialog.dismiss();
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
