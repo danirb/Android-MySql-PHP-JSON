@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -108,6 +109,22 @@ public class MainActivity extends Activity {
 	private class GetAllUsers extends AsyncTask<ApiConnector, Long, JSONArray>
 	{
 		
+		ProgressDialog pdialog; // creates progress dialog
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			
+			// set progress dialog propertied
+			pdialog = new ProgressDialog(MainActivity.this);
+			pdialog.setMessage("Fetching Recipe List");
+			pdialog.setIndeterminate(false);
+			pdialog.setCancelable(false);
+			
+			pdialog.show();
+		}
+
+		
 
 		@Override
 		protected JSONArray doInBackground(ApiConnector... params) {
@@ -121,7 +138,10 @@ public class MainActivity extends Activity {
 			
 		//	setTextToTextView(result);
 			
+			
 			setListAdapter(result);
+			pdialog.dismiss();
+			
 
 		}
 		
