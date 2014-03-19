@@ -118,6 +118,8 @@ public class MainActivity extends Activity {
 			// set progress dialog propertied
 			pdialog = new ProgressDialog(MainActivity.this);
 			pdialog.setMessage("Fetching Recipe List");
+			
+			
 			pdialog.setIndeterminate(false);
 			pdialog.setCancelable(false);
 			
