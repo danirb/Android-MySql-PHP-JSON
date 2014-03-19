@@ -9,10 +9,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
@@ -22,6 +25,10 @@ public class MainActivity extends Activity {
 	ListView getAllCustomerListView;
 	
 	private JSONArray jsonarray;
+	
+	EditText inputsearch;
+	
+	GetAllCustomerListViewAdapter adapter ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,7 @@ public class MainActivity extends Activity {
 		
 		setContentView(R.layout.activity_main);
 		
+		inputsearch = (EditText) findViewById(R.id.inputSearch);
 		//tvDisplay = (TextView) findViewById(R.id.tvDisplay);
 		
 		getAllCustomerListView = (ListView) findViewById(R.id.getAllCustomerListView);
@@ -154,7 +162,32 @@ public class MainActivity extends Activity {
 	public void setListAdapter(JSONArray jsonarray) {
 		this.jsonarray = jsonarray;
 		
-		getAllCustomerListView.setAdapter(new GetAllCustomerListViewAdapter(jsonarray, this));
+		adapter = new GetAllCustomerListViewAdapter(jsonarray, this);
+		
+		getAllCustomerListView.setAdapter(adapter);
+		
+		inputsearch.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+			}
+		});
+		//getAllCustomerListView.setAdapter(new GetAllCustomerListViewAdapter(jsonarray, this));
+		
+		
 	}
 
 
