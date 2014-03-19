@@ -133,6 +133,7 @@ public class AddRecipeActivity extends Activity {
 				
 				AlertDialog dialog = alert.create();
 				dialog.show();
+				
 			}
 			
 			catch(JSONException e)
