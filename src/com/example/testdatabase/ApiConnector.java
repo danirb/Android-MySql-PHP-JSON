@@ -86,7 +86,7 @@ public class ApiConnector {
 	
 	public JSONObject insertRecipe()
 	{
-		//JSONArray jsonarray = null;
+		
 		JSONObject jsonobject = null;
 		// url = "http://192.168.1.100/phpacademy/android/Recipe/addRecipe.php";
 		
