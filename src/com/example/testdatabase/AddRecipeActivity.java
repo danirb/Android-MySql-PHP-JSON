@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,7 +75,20 @@ public class AddRecipeActivity extends Activity {
 	private class InsertRecipe extends AsyncTask<ApiConnector, Long, JSONObject>
 	{
 
-
+		ProgressDialog pdialog; // creates progress dialog
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			
+			// set progress dialog propertied
+			pdialog = new ProgressDialog(context);
+			pdialog.setMessage("Creating Recipe");
+			pdialog.setIndeterminate(false);
+			pdialog.setCancelable(false);
+			
+			pdialog.show();
+		}
 
 		@Override
 		protected JSONObject doInBackground(ApiConnector... params) {
@@ -97,6 +111,8 @@ public class AddRecipeActivity extends Activity {
 				//jobject= jsonarray.getJSONObject(0);
 				
 				Log.d("Operation Result", result);
+				
+				pdialog.dismiss(); // dismiss progress dialog
 				
 				AlertDialog.Builder alert = new AlertDialog.Builder(context );
 				
